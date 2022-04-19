@@ -1,6 +1,7 @@
 package com.company;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class Main {
 
@@ -10,7 +11,7 @@ public class Main {
     private static int maxIndex;// копия массива
 
     public static void main(String[] args) {
-        sourceArray = new Object[]{1,null};
+        sourceArray = new Object[]{null};
         plusElement("123", customNull, sourceArray);
     }
 
@@ -33,7 +34,8 @@ public class Main {
             }
             sourceArray = resultArray;
             System.out.println(Arrays.toString(sourceArray));
-        } else if (sourceArray[sourceArray.length - 1] == null) {
+        } else if (sourceArray[sourceArray.length - 1] == null && sourceArray.length != 1) {
+            int count = 0;
             for (int i = 0; i < sourceArray.length; i++) {
                 if (sourceArray[i] == customNull) {
                     sourceArray[i] = value;
@@ -42,12 +44,29 @@ public class Main {
                     return;
                 }
             }
-            for (int i = 0; i >0 ; i++) {
+            for (int i = sourceArray.length - 1; i >= 0; i--) {
 
+                if (sourceArray[i] != null) {
+                    sourceArray[i] = value;
+                    sourceArray[i + 1] = customNull;
+                    System.out.println(Arrays.toString(sourceArray));
+                    break;
+                } else count++;
             }
+            if (count == sourceArray.length) {
+                sourceArray[0] = value;
+                sourceArray[1] = customNull;
+            }
+            System.out.println(Arrays.toString(sourceArray));
 
+        } else if (sourceArray.equals(null)) {
+            Object[] resultArray = {value, customNull};
+            sourceArray = resultArray;
+            System.out.println(Arrays.toString(sourceArray));
         }
 
 
     }
+
+
 }
