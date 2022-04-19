@@ -11,7 +11,8 @@ public class Main {
     private static int maxIndex;// копия массива
 
     public static void main(String[] args) {
-        sourceArray = new Object[]{null};
+        sourceArray = new Object[1];
+        sourceArray[0] = null;
         plusElement("123", customNull, sourceArray);
     }
 
@@ -59,7 +60,7 @@ public class Main {
             }
             System.out.println(Arrays.toString(sourceArray));
 
-        } else if (sourceArray.equals(null)) {
+        } else if (sourceArray.length ==1 && sourceArray[0] == null) {
             Object[] resultArray = {value, customNull};
             sourceArray = resultArray;
             System.out.println(Arrays.toString(sourceArray));
