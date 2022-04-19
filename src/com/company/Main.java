@@ -5,17 +5,17 @@ import java.util.Objects;
 
 public class Main {
 
-    private static final Object customNull = "Z";                    // customNull
-    private static Object[] sourceArray = {1,1,1,"Z"};                            // массив для добавления элемента
+    private static final Object customNull = "Z";
+    private static Object[] sourceArray = {1, 1, 1, 1,123};
     private static Object[] resultArray;
-    private static int maxIndex;// копия массива
+    private static int maxIndex;
 
     public static void main(String[] args) {
-        //sourceArray = new Object[1];
-        //sourceArray[0] = null;
+//        sourceArray = new Object[1];
+//        sourceArray[0] = null;
 
-        plusElement("123", customNull, sourceArray);
-
+       // plusElement("123", customNull, sourceArray);
+        deleteElement(sourceArray, 4);
     }
 
     private static void plusElement(Object value, Object customNull, Object[] sourceArray) {
@@ -27,6 +27,7 @@ public class Main {
                     resultArray[i] = value;
                     resultArray[i + 1] = customNull;
                     System.out.println(Arrays.toString(resultArray));
+                    sourceArray = resultArray;
                     return;
                 }
             }
@@ -50,14 +51,14 @@ public class Main {
             for (int i = sourceArray.length - 1; i >= 0; i--) {
 
                 if (sourceArray[i] != null) {
-                    sourceArray[i+1] = value;
-                   // sourceArray[i + 1] = customNull;
+                    sourceArray[i + 1] = value;
+                    // sourceArray[i + 1] = customNull;
                     //System.out.println(Arrays.toString(sourceArray));
                     break;
                 } else count++;
             }
             if (count > 1) {
-                sourceArray[sourceArray.length - count+1] = customNull;
+                sourceArray[sourceArray.length - count + 1] = customNull;
             }
             if (count == sourceArray.length) {
                 sourceArray[0] = value;
@@ -65,14 +66,21 @@ public class Main {
             }
             System.out.println(Arrays.toString(sourceArray));
 
-        } else if (sourceArray.length ==1 && sourceArray[0] == null) {
+        } else if (sourceArray.length == 1 && sourceArray[0] == null) {
             Object[] resultArray = {value, customNull};
             sourceArray = resultArray;
             System.out.println(Arrays.toString(sourceArray));
         }
-
-
     }
-
-
+    public static void deleteElement(Object[] sourceArray, int index){
+        if(index == sourceArray.length -1) {
+            sourceArray[sourceArray.length-1] = customNull;
+        } else if(index >= 0 && index < sourceArray.length) {
+            for (int i = index; i < sourceArray.length-1 ; i++) {
+                sourceArray[i] = sourceArray[i+1];
+            }
+            sourceArray[sourceArray.length-1] = customNull;
+        }
+        System.out.println(Arrays.toString(sourceArray));
+    }
 }
